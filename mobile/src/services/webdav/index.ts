@@ -1,2 +1,2 @@
 export * from "./types";
-export * as WebDavCore from "./core";
+export * from "./core";

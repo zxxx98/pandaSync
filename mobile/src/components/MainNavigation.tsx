@@ -7,7 +7,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import InfoIcon from '@mui/icons-material/Info';
 import { Paper } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { Home } from '@mui/icons-material';
+import { Home, PhotoLibrary } from '@mui/icons-material';
 
 export default function MainNavigation()
 {
@@ -37,6 +37,7 @@ export default function MainNavigation()
         }}
       >
         <BottomNavigationAction value={'home'} label="home" icon={< Home />} />
+        <BottomNavigationAction value={'remote'} label="remote" icon={< PhotoLibrary />} />
         < BottomNavigationAction value={'settings'} label="Settings" icon={< SettingsIcon />} />
         < BottomNavigationAction value={'about'} label="About" icon={< InfoIcon />} />
       </BottomNavigation>
