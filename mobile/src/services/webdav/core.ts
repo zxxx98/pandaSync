@@ -1,11 +1,10 @@
 import { createClient, WebDAVClient } from "webdav";
-import { WebDavAuth } from "./types";
 import { logger } from "../../utils/logger";
+import { IWebDavAuth } from "../../models/webdav/WebDavAuthModel";
 /**
  * 连接 WebDAV 服务
  */
-export async function connectWebDavService(auth: WebDavAuth)
-{
+export async function connectWebDavService(auth: IWebDavAuth) {
     const client = createClient(auth.url, {
         username: auth.username,
         password: auth.password,
@@ -16,8 +15,7 @@ export async function connectWebDavService(auth: WebDavAuth)
 }
 
 // 检查连接是否成功
-export async function checkConnection(client: WebDAVClient, auth: WebDavAuth)
-{
+export async function checkConnection(client: WebDAVClient, auth: IWebDavAuth) {
     try {
         // 尝试获取根目录内容来验证连接
         await client.getDirectoryContents("/");

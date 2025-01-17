@@ -2,21 +2,28 @@ import { Box } from "@mui/material";
 import { Typography } from "@mui/material";
 import * as WebDavService from "../../services/webdav";
 import { getWebDavBaseUrl } from "../../Config";
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { rootStore } from "../..";
+import { IRemoteLibrary } from "../../models";
 
-const Remote = () =>
-{
-    useEffect(() =>
-    {
-        WebDavService.connectWebDavService({
-            url: getWebDavBaseUrl(),
-            username: "zhouxin",
-            password: "zx736124",
-        }).then((client) =>
+const Remote = () => {
+
+    const [selectLibrary, setSelectLibrary] = useState<IRemoteLibrary | undefined>();
+
+    useEffect(() => {
+        const list = rootStore.remoteLibraryList;
+        if (list.length > 0) {
+            setSelectLibrary(list[0]);
+        }
+    }, [])
+
+    useEffect(() => {
+        if(selectLibrary)
         {
-            console.log(client);
-        });
-    }, []);
+            // 刷新图库
+            
+        }
+    }, [selectLibrary]);
     return <Box>
         <Typography variant="h1">Remote</Typography>
     </Box>
