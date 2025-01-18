@@ -1,5 +1,5 @@
 import { Instance, types } from "mobx-state-tree";
-import { WebDavAuthModel } from "./WebDavAuthModel";
+import { WebDavAuthModel } from "../webdav/WebDavAuthModel";
 
 const AuthModel = types.union(WebDavAuthModel);
 

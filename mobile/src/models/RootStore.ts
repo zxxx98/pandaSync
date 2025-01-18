@@ -1,5 +1,5 @@
 import { Instance, types } from "mobx-state-tree";
-import { RemoteLibraryModel } from "./webdav/RemoteLibraryModel";
+import { RemoteLibraryModel } from "./remoteLibrary/RemoteLibraryModel";
 
 export const RootStore = types.model({
     // 远程库列表

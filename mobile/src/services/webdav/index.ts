@@ -1,1 +1,1 @@
-export * from "./core";
+export * as WebDavService from "./core";
