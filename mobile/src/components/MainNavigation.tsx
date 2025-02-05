@@ -36,8 +36,8 @@ export default function MainNavigation()
           navigate(newValue);
         }}
       >
-        <BottomNavigationAction value={'home'} label="home" icon={< Home />} />
-        <BottomNavigationAction value={'remote'} label="remote" icon={< PhotoLibrary />} />
+        <BottomNavigationAction value={'home'} label="Home" icon={< Home />} />
+        <BottomNavigationAction value={'remote'} label="Remote" icon={< PhotoLibrary />} />
         < BottomNavigationAction value={'settings'} label="Settings" icon={< SettingsIcon />} />
         < BottomNavigationAction value={'about'} label="About" icon={< InfoIcon />} />
       </BottomNavigation>

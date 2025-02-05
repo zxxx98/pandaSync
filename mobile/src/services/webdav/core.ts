@@ -28,7 +28,6 @@ export async function checkConnection(client: WebDAVClient, auth: IWebDavAuth) {
     }
 }
 
-
 /**
  * @description 获取所有图片文件夹路径
  * 图片在远端都是按照 年/月/日 这样储存的

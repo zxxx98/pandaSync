@@ -14,12 +14,15 @@
     "@emotion/styled": "latest",
     "@mui/icons-material": "latest",
     "@mui/material": "latest",
+    "@toolpad/core": "^0.12.0",
     "mobx": "^6.13.5",
     "mobx-react-lite": "^4.1.0",
     "mobx-state-tree": "^7.0.1",
     "react": "latest",
     "react-dom": "latest",
-    "react-image-file-resizer": "^0.4.8"
+    "react-image-file-resizer": "^0.4.8",
+    "react-router-dom": "^7.1.1",
+    "webdav": "^5.7.1"
   },
   "devDependencies": {
     "@types/react": "latest",

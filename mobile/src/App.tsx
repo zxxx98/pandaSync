@@ -4,11 +4,34 @@ import MainNavigation from './components/MainNavigation';
 import Settings from './pages/settings';
 import About from './pages/about';
 import Remote from './pages/remote';
+import { useEffect, useState } from 'react';
+import {
+  NotificationsProvider,
+  NotificationsProviderSlots,
+} from '@toolpad/core/useNotifications';
+import { init } from './init';
+import { styled } from '@mui/material/styles';
+import { Box, Snackbar } from '@mui/material';
+
+const notificationsProviderSlots: NotificationsProviderSlots = {
+  //页面顶部
+  snackbar: styled(Snackbar)({ position: 'absolute', bottom: window.innerHeight - 200 }),
+};
 
 export default function App()
 {
+const [inited, setInited] = useState(false);
+
+useEffect(() => {
+    init().then(() => {
+        setInited(true);
+    });
+}, []);
+
   return (
-    <>
+    <Box sx={{ height: "100vh", width: "100vw" }}>
+    {inited ? (
+      <NotificationsProvider slots={notificationsProviderSlots}>
       <BrowserRouter>
         <Routes>
           {/* 重定向根路径到 home */}
@@ -21,6 +44,10 @@ export default function App()
         </Routes>
         <MainNavigation />
       </BrowserRouter>
-    </>
+      </NotificationsProvider>
+    ) : (
+      <div>Loading...</div>
+    )}
+    </Box>
   );
 }
