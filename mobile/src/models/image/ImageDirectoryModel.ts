@@ -6,9 +6,11 @@ export const ImageDirectoryModel = types.model({
     day: types.number,
     //文件路径
     images: types.array(types.string)
-}).views(self => {
+}).views(self =>
+{
     return {
-        get path() {
+        get path()
+        {
             return `/${self.year}/${self.month}/${self.day}`;
         }
     }

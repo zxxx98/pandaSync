@@ -10,9 +10,11 @@ import { observer } from "mobx-react-lite";
 import AddRemoteLibrary from "../../components/AddRemoteLibrary";
 import ImageNotSupportedIcon from '@mui/icons-material/ImageNotSupported';
 import { grey } from '@mui/material/colors';
+import { GalleryService } from "../../services/gallery";
 
 
-const Remote = () => {
+const Remote = () =>
+{
 
     const [selectLibrary, setSelectLibrary] = useState<IRemoteLibrary | undefined>();
     const [menuSetting, setMenuSetting] = useState<{
@@ -29,7 +31,8 @@ const Remote = () => {
         icon?: React.ReactNode;
     }[]>([]);
 
-    useEffect(() => {
+    useEffect(() =>
+    {
         const list = rootStore.remoteLibraryList;
         if (list.length > 0) {
             setSelectLibrary(list[0]);
@@ -37,22 +40,26 @@ const Remote = () => {
         initMenuItems();
     }, [])
 
-    useEffect(() => {
+    useEffect(() =>
+    {
         initMenuItems();
     }, [rootStore.remoteLibraryList.length]);
 
-    const initMenuItems = () => {
+    const initMenuItems = () =>
+    {
         const addItem = {
             label: "添加远程库",
             icon: <AddToDrive />,
-            action: () => {
+            action: () =>
+            {
                 setAddRemoteLibraryOpen(true);
             }
         }
         const items = [
             ...rootStore.remoteLibraryList.map(item => ({
                 label: item.name,
-                action: () => {
+                action: () =>
+                {
                     setSelectLibrary(item);
                 },
                 icon: <FolderOpen />,
@@ -62,24 +69,30 @@ const Remote = () => {
         setMenuItems(items);
     }
 
-    const handleMenuSetting = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const handleMenuSetting = (event: React.MouseEvent<HTMLButtonElement>) =>
+    {
         setMenuSetting({
             anchorEl: event.currentTarget,
             open: true,
         });
     }
 
-    const handleClose = () => {
+    const handleClose = () =>
+    {
         setMenuSetting({
             anchorEl: null,
             open: false,
         });
     }
 
-    useEffect(() => {
+    useEffect(() =>
+    {
         if (selectLibrary) {
             // 刷新图库
-
+            GalleryService.getGallery(selectLibrary).then(gallery =>
+            {
+                console.log(gallery);
+            });
         }
     }, [selectLibrary]);
 
@@ -96,7 +109,8 @@ const Remote = () => {
             </IconButton>
             <Menu open={menuSetting.open} onClose={handleClose} anchorEl={menuSetting.anchorEl}>
                 {menuItems.map((item, index) => (
-                    <MenuItem key={index} onClick={() => {
+                    <MenuItem key={index} onClick={() =>
+                    {
                         item.action();
                         handleClose();
                     }}>

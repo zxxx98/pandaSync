@@ -5,7 +5,8 @@ import { IImageDirectory } from "../../models/image";
 /**
  * 连接 WebDAV 服务
  */
-export async function connectWebDavService(auth: IWebDavAuth) {
+export async function connectWebDavService(auth: IWebDavAuth)
+{
     const client = createClient(auth.url, {
         username: auth.username,
         password: auth.password,
@@ -16,7 +17,8 @@ export async function connectWebDavService(auth: IWebDavAuth) {
 }
 
 // 检查连接是否成功
-export async function checkConnection(client: WebDAVClient, auth: IWebDavAuth) {
+export async function checkConnection(client: WebDAVClient, auth: IWebDavAuth)
+{
     try {
         // 尝试获取根目录内容来验证连接
         await client.getDirectoryContents("/");
@@ -35,12 +37,16 @@ export async function checkConnection(client: WebDAVClient, auth: IWebDavAuth) {
  * @param root 图片根目录
  * @returns 文件夹路径列表
  */
-export async function getImageDirectorys(client: WebDAVClient, root: string): Promise<IImageDirectory[]> {
+export async function getImageDirectorys(client: WebDAVClient, root: string): Promise<IImageDirectory[]>
+{
     try {
         const directoryContents = await client.getDirectoryContents(root) as FileStat[];
         const imageDirectories: IImageDirectory[] = [];
         for (const item of directoryContents) {
             if (item.type === "directory") {
+                //第一层的文件夹名是年份
+                const year = item.basename;
+
             }
         }
         return imageDirectories;
@@ -51,7 +57,8 @@ export async function getImageDirectorys(client: WebDAVClient, root: string): Pr
 }
 
 
-function isImageFile(filename: string) {
+function isImageFile(filename: string)
+{
     const imageExtensions = [".jpg", ".jpeg", ".png", ".gif"];
     const extension = filename.substring(filename.lastIndexOf(".")).toLowerCase();
     return imageExtensions.includes(extension);
