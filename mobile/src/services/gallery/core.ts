@@ -1,4 +1,5 @@
 import Resizer from 'react-image-file-resizer';
+import path from 'path-browserify';
 import { IAuth, IRemoteLibrary } from '../../models';
 import { LibraryType } from '../../consts';
 import { WebDavService } from '../webdav';
@@ -83,12 +84,19 @@ async function uploadImage(image: File, rl: IRemoteLibrary, errorImages: File[])
     const year = lastModifiedDate.getFullYear();
     const month = lastModifiedDate.getMonth() + 1;
     const day = lastModifiedDate.getDate();
-    const path = `${year}/${month}/${day}`;
-
+    const timePath = `${year}/${month}/${day}`;
+    const root = rl.auth.remoteBasePath || "/";
+    const originalPath = path.join(root, originalRootPath, timePath);
+    const thumbnailPath = path.join(root, thumbnailRootPath, timePath);
     try {
-        await client.createDirectory(path);
-        await client.putFileContents(`${originalRootPath}/${path}/${image.name}`, image);
-        await client.putFileContents(`${thumbnailRootPath}/${path}/${image.name}`, thumbnailBlob);
+        await client.createDirectory(originalPath, {
+            recursive: true
+        });
+        await client.createDirectory(thumbnailPath, {
+            recursive: true
+        });
+        await client.putFileContents(`${originalPath}/${image.name}`, image);
+        await client.putFileContents(`${thumbnailPath}/${image.name}`, thumbnailBlob);
         return true;
     } catch (error) {
         errorImages.push(image);

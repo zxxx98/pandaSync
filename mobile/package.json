@@ -19,6 +19,7 @@
     "mobx-react-lite": "^4.1.0",
     "mobx-state-tree": "^7.0.1",
     "nanoid": "^5.0.9",
+    "path-browserify": "^1.0.1",
     "react": "latest",
     "react-dom": "latest",
     "react-image-file-resizer": "^0.4.8",
@@ -26,6 +27,7 @@
     "webdav": "^5.7.1"
   },
   "devDependencies": {
+    "@types/path-browserify": "^1.0.3",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@vitejs/plugin-react": "latest",
